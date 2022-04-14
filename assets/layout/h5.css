@@ -1,0 +1,247 @@
+body {
+  background-color: #eee;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  color: #7c7c7c;
+}
+
+a {
+  color: #666;
+}
+
+a:hover {
+  color: #333;
+}
+
+/* bootstrap 4 */
+
+.nav-link.active {
+  border-bottom: solid 1px #fff !important;
+}
+
+/* bootstrap 3 */
+
+.alert {
+  position: relative;
+  padding: 8px 15px;
+  margin-bottom: 0;
+}
+
+.alert .alert-arrow {
+  /*color: red;*/
+  font-size: 32px;
+  position: absolute;
+  right: 6px;
+  top: -12px;
+  color: #dff0d8;
+}
+
+@media (max-width: 768px) {
+  .nav-justified>li {
+    display: table-cell;
+    width: 1%;
+  }
+  .nav-justified>li>a {
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 4px 4px 0 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .nav-justified>li.active>a {
+    border-bottom: none !important;
+  }
+}
+
+.icon {
+  border: none;
+}
+
+.modal .modal-dialog {
+  margin-top: 60px;
+}
+
+.text-muted {
+  color: #aaa !important;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+/* general list style */
+
+.main-list .list-item {
+  position: relative;
+  border-bottom: solid 1px #eee;
+  background-color: #fff;
+  padding-left: 66px;
+}
+
+.main-list .list-item .item-header {
+  padding: 8px;
+  min-height: 66px;
+}
+
+.main-list .list-item .item-icon {
+  display: block;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+  background-color: #40cc9d;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.main-list .list-item img.portrait {
+  display: block;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+}
+
+.main-list .list-item .item-arrow {
+  padding-right: 8px;
+  float: right;
+  line-height: 50px;
+}
+
+.main-list .list-item .item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.main-list .list-item .item-hint {
+  font-size: 12px;
+}
+
+.main-list .list-item .item-summary {
+  padding-top: 6px;
+  font-size: 12px;
+  color: #999;
+}
+
+.main-list .list-item .item-content {
+  padding: 8px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* ticket styles */
+
+.ticket-list {
+  position: relative;
+  padding: 0 1em;
+  padding-bottom: 80px;
+}
+
+.ticket-list .table, .ticket-list .list-group {
+  margin: 0;
+}
+
+.ticket-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 1em 0;
+  padding: 1em;
+  border-left: solid 5px #999;
+  border-radius: 3px;
+  box-shadow: 0 0 3px 1px #ddd;
+  background-color: #fff;
+  color: #1c1c1c;
+}
+
+.ticket-item .hash-anchor {
+  position: absolute;
+  top: -75px;
+}
+
+.ticket-item .ticket-title {
+  display: inline-block;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
+.ticket-item .ticket-type, .ticket-item .ticket-status {
+  float: right;
+  display: block;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.ticket-item .ticket-type {
+  padding: 0 8px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 12px;
+  border: solid 1px #ccc;
+  color: #999;
+}
+
+.ticket-item .ticket-status {
+  color: #fc8602;
+}
+
+.ticket-list.room-list .ticket-item .ticket-status {
+  color: #038fff;
+}
+
+.ticket-item .ticket-content {
+  padding: 8px 0;
+  line-height: 24px;
+  color: #999;
+}
+
+.ticket-item .ticket-msg {
+  font-size: 16px;
+  color: #fc8602;
+}
+
+.ticket-item .ticket-icon {
+  margin-right: 8px;
+  color: #525252;
+}
+
+.ticket-item .ticket-icon.disabled {
+  color: #ccc;
+}
+
+.ticket-item.active {
+  border-color: #fff8dc;
+}
+
+.ticket-item.active .ticket-title, .ticket-item.active .ticket-status, .ticket-item.active .ticket-msg {
+  color: #fc8602;
+}
+
+.ticket-item.approved {
+  border-color: #c5f9e3;
+}
+
+.ticket-item.approved .ticket-title, .ticket-item.approved .ticket-status, .ticket-item.approved .ticket-msg {
+  color: #40cc9d;
+}
+
+.ticket-item.rejected {
+  border-color: #fabdbb;
+}
+
+.ticket-item.rejected .ticket-title, .ticket-item.rejected .ticket-status, .ticket-item.rejected .ticket-msg {
+  color: #d9534f;
+}
+
+.ticket-item>.fa.float-right {
+  padding-top: 3px;
+}
