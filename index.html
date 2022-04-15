@@ -20,8 +20,8 @@
 </head>
 
 <body>
-	<h2 class="text-center">核酸筛查社区登记系统</h1>
-	<h3 class="text-center">大华16街区临时版</h2>
+	<h2 class="text-center">社区团购提货登记系统</h1>
+	<h3 class="text-center">大华16街区紫燕某味鸡临时版</h2>
 	<br>
 	<div class="px-2" width="80%">
 		<label>单元：</label>
@@ -109,50 +109,18 @@
 			<option value="80">80</option>
 			<option value="81">81</option>
 		</select>
-		<label>楼层：</label>
-		<select id="floor" style="width: 5rem" onchange=refreshDat()>
+		<label>已领：</label>
+		<select id="checked" style="width: 5rem" multiple="multiple" required="required" onblur=refreshDat()>
 			<option value="-1">所有</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-		</select>
-		<label>已检：</label>
-		<select id="checked" style="width: 5rem" onchange=refreshDat()>
-			<option value="-1">所有</option>
-			<option value="0">未检</option>
-			<option value="1">已检</option>
-		</select>
-		<label>应检：</label>
-		<select id="should" style="width: 8rem" onchange=refreshDat()>
-			<option value="-1">所有</option>
-			<option value="0">应检</option>
-			<option value="1">其他（在外）</option>
+			<option value="0">未领</option>
+			<option value="1">未领完</option>
+			<option value="2">已领</option>
 		</select>
 		<input type="button" id="refresh" value="刷新">
 		<input type="button" id="reset-sort" value="重置筛选条件">
-		<input type="button" id="reset" class="bg-red" value="重置筛查数据">
 		<br>
-		<span onclick=setSort(0) style="background-color: white" height="100%">应检未检</span>
-		<span onclick=setSort(1) style="background-color: green" height="100%">应检已检</span>
-		<span onclick=setSort(2) style="background-color: yellow" height="100%">非应检未检</span>
-		<span onclick=setSort(3) style="background-color: orange" height="100%">非应检已检</span>
+		<span onclick=setSort(0) style="background-color: white" height="100%">需领</span>
+		<span onclick=setSort(1) style="background-color: green" height="100%">已领</span>
 	</div>
 	<div class="px-2 text-center">
 		<table id="info" border="1" width="100%">
