@@ -11,7 +11,9 @@ $checked = $_POST["checked"];
 
 
 $query = "";
-if ($unit != "-1") $query = $query . "substring(room,1,2) = " . $unit . " and ";
+if ($unit == "-2") $query = "(substring(room,1,2) = 9 or substring(room,1,2) = 28 or substring(room,1,2) = 47 or substring(room,1,2) = 1 or substring(room,1,2) = 72 or substring(room,1,2) = 2 or substring(room,1,2) = 49 or substring(room,1,2) = 63) and ";
+else if ($unit != "-1") $query = $query . "substring(room,1,2) = " . $unit . " and ";
+
 if ($checked != "-1") {
 	for ($i = 0; $i < sizeof(explode(",", $checked)); $i++) {
 		$query = $query . "checkStat = " . explode(",", $checked)[$i] . " or ";

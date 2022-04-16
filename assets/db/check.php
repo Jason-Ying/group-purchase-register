@@ -11,9 +11,11 @@ $ver_all = $_POST["ver_all"];
 
 
 $sql = mysqli_query($conn, "update purc set checked=$req where id=$id");
-if ("-1" == $req) $sql = mysqli_query($conn, "update purc set checkStat=0 where id=$id");
-if ($ver_all == $req) $sql = mysqli_query($conn, "update purc set checkStat=2 where id=$id");
-else $sql = mysqli_query($conn, "update purc set checkStat=1 where id=$id");
+if ($req == 0){
+	$sql = mysqli_query($conn, "update purc set checkStat=0 where id=$id");
+} else if ($ver_all == $req){
+	$sql = mysqli_query($conn, "update purc set checkStat=2 where id=$id");
+} else $sql = mysqli_query($conn, "update purc set checkStat=1 where id=$id");
 
 if (1 == 0) {
 	echo json_encode('err');

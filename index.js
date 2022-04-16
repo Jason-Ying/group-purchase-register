@@ -23,7 +23,7 @@ let lookModel =
 	"</tr>";
 let checkedText = ["未领", "已领"];
 function trueOnClick(i) {
-	if ($("#checked" + i.toString()).val() === null){
+	if ($("#checked" + i.toString()).val() === null) {
 		check(queryRes[i][0], 0, ((1 << (queryRes[i][5].split(",").length - 1)) - 1));
 		queryRes[i][7] = "0";
 	} else {
@@ -49,12 +49,15 @@ function updateLook() {
 			optionsRepl += "<option value=\"" + j.toString() + "\">" + queryRes[i][5].split(",")[j] + "</option>";
 		}
 		personModel = personModel.replace(/OPTIONS/g, optionsRepl);
-		personModel = personModel.replace(/NUM/g, queryRes[i][0] - 1); // id
+		personModel = personModel.replace(/NUM/g, i); // id
 		personModel = personModel.replace(/ID/g, queryRes[i][1]); // sid
 		personModel = personModel.replace(/ROOM/g, queryRes[i][2]); // room
 		personModel = personModel.replace(/NAME/g, queryRes[i][3]); // name
 		personModel = personModel.replace(/PHONE/g, queryRes[i][4]); // phone
 		personModel = personModel.replace(/ITEMS/g, queryRes[i][5].split(",").join("<br>"))
+		if (queryRes[i][2].substring(0, 2) == "09" || queryRes[i][2].substring(0, 2) == "28" || queryRes[i][2].substring(0, 2) == "47" || queryRes[i][2].substring(0, 2) == "01" || queryRes[i][2].substring(0, 2) == "72" || queryRes[i][2].substring(0, 2) == "02" || queryRes[i][2].substring(0, 2) == "49" || queryRes[i][2].substring(0, 2) == "63") {
+			personModel = personModel.replace(/COLOR/g, "red");
+		}
 		if (queryRes[i][7] == "0") { // checked
 			personModel = personModel.replace(/CHECKED/g, "未领");
 			personModel = personModel.replace(/COLOR/g, "white");
@@ -101,9 +104,10 @@ $("#reset").on("click", function () {
 
 function setSort(n) {
 	let sortPattern =
-		[[-2, [0,1]],
-		[-2, [2]]];
-	if (sortPattern[n][0] != -2) $("#unit").val(sortPattern[n][0]);
-	if (sortPattern[n][1] != -2) $("#checked").val(sortPattern[n][1]);
+		[[-1, [0, 1]],
+		[-1, [2]],
+		[-2, [-1]]];
+	$("#unit").val(sortPattern[n][0]);
+	$("#checked").val(sortPattern[n][1]);
 	refreshDat();
 }
