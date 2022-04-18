@@ -1,6 +1,52 @@
 function sleep(ms, callback) {
 	setTimeout(callback, ms);
 }
+
+
+
+let queryRes = new Array();
+
+
+
+function getOrders(unit, checked) {
+	if (checked === null) checked = "-1";
+	else checked = checked.join(",");
+	let datas = { "unit": unit, "checked": checked };
+	$.ajax({
+		url: './assets/db/query.php',
+		type: 'post',
+		dataType: 'json',
+		data: datas,
+		async: false,
+		success: function (result) {
+			queryRes = [];
+			for (let i = 0; i < result.split(";;;").length - 1; i++) {
+				queryRes[i] = result.split(";;;")[i].split(";");
+			}
+		},
+		error: function () {
+			alert("FATAL_ERR: ERR_QUERY_PHP");
+		}
+	})
+}
+function check(n, requ, ver_all) {
+	$.ajax({
+		url: './assets/db/check.php',
+		type: 'post',
+		dataType: 'json',
+		data: { "id": n, "req": requ, "ver_all": ver_all },
+		async: false,
+		success: function (result) {
+			if (result != "success") alert("ERR: ERR_CHECK_REP");
+		},
+		error: function () {
+			alert("FATAL_ERR: ERR_CHECK_PHP");
+		}
+	})
+}
+
+
+
 let titleModel =
 	"<tr>" +
 	"<td style=\"width: 4rem\">接龙号</td>" +
@@ -22,6 +68,9 @@ let lookModel =
 	"<td>CHECKED</td>" +
 	"</tr>";
 let checkedText = ["未领", "已领"];
+
+
+
 function trueOnClick(i) {
 	if ($("#checked" + i.toString()).val() === null) {
 		check(queryRes[i][0], 0, ((1 << (queryRes[i][5].split(",").length - 1)) - 1));
@@ -43,35 +92,32 @@ function trueOnClick(i) {
 function updateLook() {
 	document.getElementById("info").innerHTML = titleModel;
 	for (let i = 0; i < queryRes.length; ++i) {
-		let personModel = lookModel;
+		let orderModel = lookModel;
 		let optionsRepl;
 		for (let j = 0; j < queryRes[i][5].split(",").length - 1; j++) {
 			optionsRepl += "<option value=\"" + j.toString() + "\">" + queryRes[i][5].split(",")[j] + "</option>";
 		}
-		personModel = personModel.replace(/OPTIONS/g, optionsRepl);
-		personModel = personModel.replace(/NUM/g, i); // id
-		personModel = personModel.replace(/ID/g, queryRes[i][1]); // sid
-		personModel = personModel.replace(/ROOM/g, queryRes[i][2]); // room
-		personModel = personModel.replace(/NAME/g, queryRes[i][3]); // name
-		personModel = personModel.replace(/PHONE/g, queryRes[i][4]); // phone
-		personModel = personModel.replace(/ITEMS/g, queryRes[i][5].split(",").join("<br>"))
-		if (queryRes[i][2].substring(0, 2) == "09" || queryRes[i][2].substring(0, 2) == "28" ||
-		queryRes[i][2].substring(0, 2) == "47" || queryRes[i][2].substring(0, 2) == "01" ||
-		queryRes[i][2].substring(0, 2) == "72" || queryRes[i][2].substring(0, 2) == "02" ||
-		queryRes[i][2].substring(0, 2) == "49" || queryRes[i][2].substring(0, 2) == "63") {
-			personModel = personModel.replace(/COLOR/g, "red");
+		orderModel = orderModel.replace(/OPTIONS/g, optionsRepl);
+		orderModel = orderModel.replace(/NUM/g, i); // id
+		orderModel = orderModel.replace(/ID/g, queryRes[i][1]); // sid
+		orderModel = orderModel.replace(/ROOM/g, queryRes[i][2]); // room
+		orderModel = orderModel.replace(/NAME/g, queryRes[i][3]); // name
+		orderModel = orderModel.replace(/PHONE/g, queryRes[i][4]); // phone
+		orderModel = orderModel.replace(/ITEMS/g, queryRes[i][5].split(",").join("<br>"))
+		if (locked(queryRes[i][2])) {
+			orderModel = orderModel.replace(/COLOR/g, "red");
 		}
 		if (queryRes[i][7] == "0") { // checked
-			personModel = personModel.replace(/CHECKED/g, "未领");
-			personModel = personModel.replace(/COLOR/g, "white");
+			orderModel = orderModel.replace(/CHECKED/g, "未领");
+			orderModel = orderModel.replace(/COLOR/g, "white");
 		} else if (parseInt(queryRes[i][7]) < (1 << (queryRes[i][5].split(",").length - 1)) - 1) {
-			personModel = personModel.replace(/CHECKED/g, "未领完");
-			personModel = personModel.replace(/COLOR/g, "orange");
+			orderModel = orderModel.replace(/CHECKED/g, "未领完");
+			orderModel = orderModel.replace(/COLOR/g, "orange");
 		} else {
-			personModel = personModel.replace(/CHECKED/g, "已领");
-			personModel = personModel.replace(/COLOR/g, "green");
+			orderModel = orderModel.replace(/CHECKED/g, "已领");
+			orderModel = orderModel.replace(/COLOR/g, "green");
 		}
-		document.getElementById("info").innerHTML += personModel;
+		document.getElementById("info").innerHTML += orderModel;
 	}
 	for (let i = 0; i < queryRes.length; i++) {
 		let chosen = [];
@@ -84,25 +130,17 @@ function updateLook() {
 	}
 }
 
+
+
 $("#refresh").on("click", function () { refreshDat() });
 function refreshDat() {
-	getResidentList($("#unit").val(), $("#checked").val());
+	getOrders($("#unit").val(), $("#checked").val());
 	updateLook();
 }
-
 $("#reset-sort").on("click", function () {
 	$("#unit").val("-1");
 	$("#checked").val("-1");
 	refreshDat();
-})
-$("#reset").on("click", function () {
-	let conf = prompt("将要重置所有已检记录数据，此操作不可撤销，若要继续请输入当前日期");
-	if (parseInt(conf) === new Date().getDate()) {
-		reset();
-		refreshDat();
-		alert("已重置！");
-		window.location.reload();
-	}
 })
 
 function setSort(n) {
@@ -115,3 +153,7 @@ function setSort(n) {
 	$("#checked").val(sortPattern[n][1]);
 	refreshDat();
 }
+
+
+
+refreshDat();

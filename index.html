@@ -10,18 +10,14 @@
 	<meta content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1" name="viewport">
 	<meta content="" name="keywords">
 	<meta content="" name="description">
-	<title>Group Perchase Registeration</title>
+	<title>GPRS - Orders</title>
 	<link href="./assets/layout/common.min.css" rel="stylesheet">
-	<script>
-		let queryRes = new Array();
-	</script>
 	<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="./assets/scripts/global.js"></script>
 </head>
 
 <body>
 	<h2 class="text-center">社区团购提货登记系统</h1>
-	<h3 class="text-center">大华16街区紫燕某味鸡临时版</h2>
+	<h3 class="text-center">大华16街区紫燕某味鸡临时版 订单列表</h2>
 	<br>
 	<div class="px-2" width="80%">
 		<label>单元：</label>
@@ -113,7 +109,7 @@
 		</select>
 		<label>已领：</label>
 		<select id="checked" style="width: 5rem" multiple="multiple" required="required" onblur=refreshDat()>
-			<option value="-1">所有</option>
+			<option value="-1" selected="selected">所有</option>
 			<option value="0">未领</option>
 			<option value="1">未领完</option>
 			<option value="2">已领</option>
@@ -131,10 +127,8 @@
 
 		</table>
 	</div>
-	<script src="index.js"></script>
-	<script>
-		refreshDat();
-	</script>
+	<script type="text/javascript" src="./assets/scripts/global.js"></script>
+	<script type="text/javascript" src="./assets/scripts/index.js"></script>
 </body>
 
 </html>
