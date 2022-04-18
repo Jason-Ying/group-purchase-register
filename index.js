@@ -55,7 +55,10 @@ function updateLook() {
 		personModel = personModel.replace(/NAME/g, queryRes[i][3]); // name
 		personModel = personModel.replace(/PHONE/g, queryRes[i][4]); // phone
 		personModel = personModel.replace(/ITEMS/g, queryRes[i][5].split(",").join("<br>"))
-		if (queryRes[i][2].substring(0, 2) == "09" || queryRes[i][2].substring(0, 2) == "28" || queryRes[i][2].substring(0, 2) == "47" || queryRes[i][2].substring(0, 2) == "01" || queryRes[i][2].substring(0, 2) == "72" || queryRes[i][2].substring(0, 2) == "02" || queryRes[i][2].substring(0, 2) == "49" || queryRes[i][2].substring(0, 2) == "63") {
+		if (queryRes[i][2].substring(0, 2) == "09" || queryRes[i][2].substring(0, 2) == "28" ||
+		queryRes[i][2].substring(0, 2) == "47" || queryRes[i][2].substring(0, 2) == "01" ||
+		queryRes[i][2].substring(0, 2) == "72" || queryRes[i][2].substring(0, 2) == "02" ||
+		queryRes[i][2].substring(0, 2) == "49" || queryRes[i][2].substring(0, 2) == "63") {
 			personModel = personModel.replace(/COLOR/g, "red");
 		}
 		if (queryRes[i][7] == "0") { // checked
@@ -106,6 +109,7 @@ function setSort(n) {
 	let sortPattern =
 		[[-1, [0, 1]],
 		[-1, [2]],
+		[-3, [-1]],
 		[-2, [-1]]];
 	$("#unit").val(sortPattern[n][0]);
 	$("#checked").val(sortPattern[n][1]);

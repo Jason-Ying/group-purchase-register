@@ -26,7 +26,8 @@
 	<div class="px-2" width="80%">
 		<label>单元：</label>
 		<select id="unit" style="width: 5rem" onchange=refreshDat()>
-			<option value="-2">封控</option>
+			<option value="-3">封控</option>
+			<option value="-2">非封控</option>
 			<option value="-1" selected="selected">所有</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -123,6 +124,7 @@
 		<span onclick=setSort(0) style="background-color: white" height="100%">需领</span>
 		<span onclick=setSort(1) style="background-color: green" height="100%">已领</span>
 		<span onclick=setSort(2) style="background-color: red" height="100%">封控楼栋</span>
+		<span onclick=setSort(3) style="background-color: white" height="100%">非封控楼栋</span>
 	</div>
 	<div class="px-2 text-center">
 		<table id="info" border="1" width="100%">
