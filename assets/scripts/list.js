@@ -31,11 +31,13 @@ function getItems() {
 let titleModel =
 	"<tr>" +
 	"<td style=\"width: 4rem\">商品号</td>" +
-	"<td style=\"width: 5rem\">商品名称</td>" +
-	"<td style=\"width: 4rem\">数量</td>" +
-	"<td style=\"width: 7rem\">已领数量</td>" +
-	"<td style=\"width: 7rem\">非封控楼数量</td>" +
-	"<td style=\"width: 7rem\">非封控楼已领数量</td>" +
+	"<td style=\"width: 15rem\">商品名称</td>" +
+	"<td>总</td>" +
+	"<td>已领</td>" +
+	"<td>非封控楼总</td>" +
+	"<td>非封控楼已领</td>" +
+	"<td>封控楼总</td>" +
+	"<td>封控楼已领</td>" +
 	"</tr>";
 let lookModel =
 	"<tr bgcolor=\"COLOR\">" +
@@ -45,6 +47,8 @@ let lookModel =
 	"<td>OK</td>" +
 	"<td>NO_CNT</td>" +
 	"<td>NO_OK</td>" +
+	"<td>YES_CNT</td>" +
+	"<td>YES_OK</td>" +
 	"</tr>";
 
 let itemCnt = function () {
@@ -96,6 +100,8 @@ function updateLook() {
 		itemModel = itemModel.replace(/NAME/g, v); // item name
 		itemModel = itemModel.replace(/NO_OK/g, itemsCnt[tmpId].okNonLockdown);
 		itemModel = itemModel.replace(/NO_CNT/g, itemsCnt[tmpId].cntNonLockdown);
+		itemModel = itemModel.replace(/YES_OK/g, itemsCnt[tmpId].okAll - itemsCnt[tmpId].okNonLockdown);
+		itemModel = itemModel.replace(/YES_CNT/g, itemsCnt[tmpId].cntAll - itemsCnt[tmpId].cntNonLockdown);
 		itemModel = itemModel.replace(/OK/g, itemsCnt[tmpId].okAll);
 		itemModel = itemModel.replace(/CNT/g, itemsCnt[tmpId].cntAll);
 		itemModel = itemModel.replace(/COLOR/g, "");
