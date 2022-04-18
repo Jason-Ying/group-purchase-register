@@ -56,20 +56,33 @@ let itemCnt = function () {
 }
 let itemsName = new Set();
 let itemsCnt = new Array();
+let itemsId = new Map();
 function transformDat() {
 	itemsName.clear();
 	itemsCnt = [];
+	itemsId.clear();
 	let tmpId = -1;
 	for (let i = 0; i < queryRes.length; ++i) {
 		for (let j = 0; j < queryRes[i][1].split(",").length - 1; j++) {
 			if (!itemsName.has(queryRes[i][1].split(",")[j].split("*")[0])) itemsCnt[++tmpId] = new itemCnt;
 			itemsName.add(queryRes[i][1].split(",")[j].split("*")[0]);
+		}
+	}
+	let tmp = 0;
+	itemsName.forEach(function (v) {
+		itemsId.set(v, tmp);
+		tmp++;
+		console.log(tmp);
+	});
+	for (let i = 0; i < queryRes.length; ++i) {
+		for (let j = 0; j < queryRes[i][1].split(",").length - 1; j++) {
 			let thisCnt = parseInt(queryRes[i][1].split(",")[j].split("*")[1]);
-			itemsCnt[tmpId].cntAll += thisCnt;
-			if (!locked(queryRes[i][0])) itemsCnt[tmpId].cntNonLockdown += thisCnt;
+			let id = itemsId.get(queryRes[i][1].split(",")[j].split("*")[0]);
+			itemsCnt[id].cntAll += thisCnt;
+			if (!locked(queryRes[i][0])) itemsCnt[id].cntNonLockdown += thisCnt;
 			if ((1 << j) & parseInt(queryRes[i][2])) {
-				itemsCnt[tmpId].okAll += thisCnt;
-				if (!locked(queryRes[i][0])) itemsCnt[tmpId].okNonLockdown += thisCnt;
+				itemsCnt[id].okAll += thisCnt;
+				if (!locked(queryRes[i][0])) itemsCnt[id].okNonLockdown += thisCnt;
 			}
 		}
 	}
