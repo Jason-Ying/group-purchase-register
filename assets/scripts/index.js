@@ -134,6 +134,7 @@ function updateLook() {
 
 $("#refresh").on("click", function () { refreshDat() });
 function refreshDat() {
+	getLockdown();
 	getOrders($("#unit").val(), $("#checked").val());
 	updateLook();
 }

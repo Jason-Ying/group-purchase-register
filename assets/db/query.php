@@ -10,13 +10,29 @@ $checked = $_POST["checked"];
 
 
 
+$sql = mysqli_query($conn, "select locked from lockdown");
+$row = mysqli_fetch_array($sql);
+$num = $row[0];
+
+
+
 $query = "";
-if ($unit == "-3") $query = "(substring(room,1,2) = 9 or substring(room,1,2) = 28
-or substring(room,1,2) = 47 or substring(room,1,2) = 1 or substring(room,1,2) = 72
-or substring(room,1,2) = 2 or substring(room,1,2) = 49 or substring(room,1,2) = 63) and ";
-else if ($unit == "-2") $query = "(not (substring(room,1,2) = 9 or substring(room,1,2) = 28
-or substring(room,1,2) = 47 or substring(room,1,2) = 1 or substring(room,1,2) = 72
-or substring(room,1,2) = 2 or substring(room,1,2) = 49 or substring(room,1,2) = 63)) and ";
+if ($unit == "-3" || $unit == "-2") {
+	for ($i = 0; $i < sizeof(explode(",", $num)); $i++) {
+		$query = $query . "substring(room,1,2) = " . explode(",", $num)[$i] . " or ";
+	}
+	if ($query != "") $query = substr($query, 0, -4);
+	$query = "(" . $query . ")";
+	if ($unit == "-3") $query = $query . " and ";
+	else if ($unit == "-2") $query = "(not " . $query . ") and ";
+}
+// $query = "";
+// if ($unit == "-3") $query = "(substring(room,1,2) = 22 or substring(room,1,2) = 28
+// or substring(room,1,2) = 47 or substring(room,1,2) = 1 or substring(room,1,2) = 72
+// or substring(room,1,2) = 2 or substring(room,1,2) = 49 or substring(room,1,2) = 63 or substring(room,1,2) = 71) and ";
+// else if ($unit == "-2") $query = "(not (substring(room,1,2) = 9 or substring(room,1,2) = 28
+// or substring(room,1,2) = 47 or substring(room,1,2) = 1 or substring(room,1,2) = 72
+// or substring(room,1,2) = 2 or substring(room,1,2) = 49 or substring(room,1,2) = 63)) and ";
 else if ($unit != "-1") $query = $query . "substring(room,1,2) = " . $unit . " and ";
 
 if ($checked != "-1") {

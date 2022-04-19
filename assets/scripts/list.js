@@ -76,7 +76,6 @@ function transformDat() {
 	itemsName.forEach(function (v) {
 		itemsId.set(v, tmp);
 		tmp++;
-		console.log(tmp);
 	});
 	for (let i = 0; i < queryRes.length; ++i) {
 		for (let j = 0; j < queryRes[i][1].split(",").length - 1; j++) {
@@ -113,6 +112,7 @@ function updateLook() {
 
 $("#refresh").on("click", function () { refreshDat() });
 function refreshDat() {
+	getLockdown();
 	getItems();
 	transformDat();
 	updateLook();

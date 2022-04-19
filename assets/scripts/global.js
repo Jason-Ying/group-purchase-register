@@ -1,5 +1,19 @@
+let lockedList = new Array();
+function getLockdown() {
+	$.ajax({
+		url: './assets/db/lockdown_query.php',
+		type: 'post',
+		dataType: 'json',
+		async: false,
+		success: function (result) {
+			lockedList = result.split(",");
+		},
+		error: function () {
+			alert("FATAL_ERR: ERR_LDQUERY_PHP");
+		}
+	})
+}
 function locked(s) {
-	let lockedList = [9, 28, 47, 1, 72, 2, 49, 63];
 	for (let i = 0; i < lockedList.length; ++i)
 		if (parseInt(s.substring(0, 2)) == lockedList[i]) return true;
 	return false;
