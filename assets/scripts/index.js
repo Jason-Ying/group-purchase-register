@@ -158,3 +158,18 @@ function setSort(n) {
 
 
 refreshDat();
+
+function showUnits() {
+	let hasUnit = [-1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1];
+	let buyUnit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	for (let i = 0; i < queryRes.length; i++) {
+		buyUnit[parseInt(queryRes[i][2].split("-")[0])] = 1;
+	}
+	for (let i = 0; i < hasUnit.length; i++) {
+		if (!hasUnit[i]) continue;
+		if (buyUnit[i]) document.getElementById("unit").innerHTML += "<option value=\"" + i.toString() + "\">" + i.toString() + "</option>";
+		else document.getElementById("unit").innerHTML += "<option disabled=\"disabled\" value=\"" + i.toString() + "\">" + i.toString() + "</option>";
+	}
+}
+
+showUnits();
