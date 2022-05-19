@@ -18,3 +18,10 @@ function locked(s) {
 		if (parseInt(s.substring(0, 2)) == lockedList[i]) return true;
 	return false;
 }
+function init(){
+	$.ajax({
+		url: './assets/db/init.php',
+		type: 'post',
+		async: false
+	})
+}
