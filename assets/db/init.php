@@ -1,7 +1,13 @@
 <?php
 @header("content-type:text/html;charset=utf8");
 $conn = mysqli_connect("localhost", "root", "123456") or die("FATAL_ERR" . mysqli_error($conn));
-$select = mysqli_select_db($conn, 'gprs');
+
+if (mysqli_query($conn, "CREATE DATABASE gprs")) {
+	echo "Database created";
+} else {
+	echo "Error creating database: " . mysqli_error($conn);
+	return;
+}
 
 $sql = file_get_contents('init.sql');
 
